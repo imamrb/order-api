@@ -15,12 +15,20 @@ var orderItemSchema = new Schema(
   }
 )
 
+let validateArrayLength = (arr) => arr.length > 0
+
 const orderSchema = new Schema(
   {
-    orderItems: [orderItemSchema],
+    orderItems: {
+      type: [orderItemSchema],
+      validate: {
+        validator: value => value.length > 0,
+        message: 'Order items can not be empty!',
+      },
+    },
     phone: {
       type: String,
-      required: [true, "Phone number is required!"],
+      required: [true, 'Phone number is required!'],
       validate: {
         validator: value => validator.isMobilePhone(value),
         message: 'Phone number is invalid!',
