@@ -15,8 +15,6 @@ var orderItemSchema = new Schema(
   }
 )
 
-let validateArrayLength = (arr) => arr.length > 0
-
 const orderSchema = new Schema(
   {
     orderItems: {
