@@ -12,6 +12,18 @@ orderRouter.get('/orders', async (req, res) => {
   }
 })
 
+orderRouter.get('/orders/:orderId', async (req, res) => {
+  try {
+    const order = await Order.findOne({ _id: req.params.orderId })
+    if (!order) {
+      return res.status(404).send({ error: 'Order not found!' })
+    }
+    res.send(order)
+  } catch (e) {
+    res.status(500).send(e)
+  }
+})
+
 orderRouter.post('/orders', async (req, res) => {
   const order = new Order(req.body)
 
